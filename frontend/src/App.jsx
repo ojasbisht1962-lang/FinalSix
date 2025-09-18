@@ -11,6 +11,7 @@ import DashboardPage from "./routes/DashboardPage";
 import CareersPage from "./routes/CareersPage";
 import CollegesPage from "./routes/CollegesPage";
 import SchoolsPage from "./routes/SchoolsPage";
+import NotificationsPage from "./routes/NotificationsPage";
 import "./App.css";
 import "./index.css";
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/colleges" element={<CollegesPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/schools" element={<SchoolsPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
         </Routes>
       </Layout>
     </Router>

@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
     { name: 'Career Guidance', href: '/careers', current: location.pathname === '/careers' },
     { name: 'College Section', href: '/colleges', current: location.pathname === '/colleges' },
     { name: 'School Section', href: '/schools', current: location.pathname === '/schools' },
-    { name: 'About', href: '/about', current: location.pathname === '/about' },
+    { name: 'Notifications', href: '/notifications', current: location.pathname === '/notifications' },
   ];
 
   const toggleMenu = () => {
@@ -30,10 +30,19 @@ const Layout = ({ children }) => {
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-2">
-                  <span className="text-white font-bold text-sm">CC</span>
+                {/* Try to load logo, fallback to text logo if not found */}
+                <img 
+                  src="/PicFinal.png" 
+                  alt="CareerCompass Logo" 
+                  className="h-16 w-auto"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-80 h-80 bg-blue-600 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                  <span className="text-white font-bold text-lg">CC</span>
                 </div>
-                <h1 className="text-xl font-bold text-gray-900">CareerCompass</h1>
               </div>
             </Link>
 
@@ -128,10 +137,19 @@ const Layout = ({ children }) => {
             {/* Company Info */}
             <div className="col-span-1">
               <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-2">
-                  <span className="text-white font-bold text-sm">CC</span>
+                {/* Try to load logo, fallback to text logo if not found */}
+                <img 
+                  src="/PicFinal.png" 
+                  alt="CareerCompass Logo" 
+                  className="h-50 w-auto"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-50 h-50 bg-blue-600 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                  <span className="text-white font-bold text-lg">CC</span>
                 </div>
-                <h3 className="text-xl font-bold">CareerCompass</h3>
               </div>
               <p className="text-gray-400 text-sm">
                 Discover your ideal career path with our comprehensive assessments and personalized guidance.

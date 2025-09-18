@@ -21,10 +21,19 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-2">
-              <span className="text-white font-bold text-sm">CC</span>
+            {/* Try to load logo, fallback to text logo if not found */}
+            <img 
+              src="/final-project/frontend/public/Logo.png" 
+              alt="CareerCompass Logo" 
+              className="h-5 w-auto"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextElementSibling.style.display = 'flex';
+              }}
+            />
+            <div className="w-50 h-50 bg-blue-600 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+              <span className="text-white font-bold text-lg">CC</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">CareerCompass</span>
           </Link>
 
           {/* Desktop Navigation */}
