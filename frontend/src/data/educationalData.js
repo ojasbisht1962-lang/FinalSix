@@ -351,6 +351,7 @@ export const colleges = [
 ];
 
 export const careers = [
+  // Science Stream Careers
   {
     id: 1,
     career_name: "Software Engineer",
@@ -361,10 +362,26 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Software_engineer",
     salary_range: "₹3-50 LPA",
     career_progression: "Junior Developer → Senior Developer → Tech Lead → Engineering Manager",
-    skills_required: ["Programming", "Problem Solving", "System Design", "Database Management"]
+    skills_required: ["Programming", "Problem Solving", "System Design", "Database Management"],
+    higher_studies: ["M.Tech", "MBA Tech Management", "MS abroad"],
+    career_paths: ["Product Manager", "Tech Entrepreneur", "CTO", "Solutions Architect"]
   },
   {
     id: 2,
+    career_name: "Data Scientist",
+    stream: "science",
+    required_degree: "B.Tech",
+    description: "Data scientists analyze complex data to help companies make informed decisions. High demand across industries with excellent growth prospects in AI and machine learning domains.",
+    keywords: ["data analysis", "machine learning", "statistics", "python", "AI"],
+    website: "https://en.wikipedia.org/wiki/Data_science",
+    salary_range: "₹4-60 LPA",
+    career_progression: "Data Analyst → Data Scientist → Senior Data Scientist → Lead Data Scientist",
+    skills_required: ["Python/R", "Machine Learning", "Statistics", "Data Visualization", "SQL"],
+    higher_studies: ["MS Data Science", "PhD", "MBA Analytics"],
+    career_paths: ["Chief Data Officer", "AI Research Scientist", "ML Engineer", "Business Intelligence Lead"]
+  },
+  {
+    id: 3,
     career_name: "Doctor/Physician",
     stream: "science",
     required_degree: "M.B.B.S.",
@@ -373,34 +390,54 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Physician",
     salary_range: "₹6-100 LPA",
     career_progression: "MBBS → Residency → Specialist → Senior Consultant → Department Head",
-    skills_required: ["Medical Knowledge", "Diagnosis", "Patient Care", "Communication", "Emergency Response"]
-  },
-  {
-    id: 3,
-    career_name: "Chartered Accountant (CA)",
-    stream: "commerce",
-    required_degree: "B.Com",
-    description: "Regulated by the ICAI, this profession offers a clear and lucrative career path with steep salary growth. Working for a \"Big 4\" firm provides a significant salary advantage, and earnings are boosted by passing exams on the first attempt.",
-    keywords: ["numbers", "financial calculations", "detail-oriented", "data analysis", "managing resources"],
-    website: "https://www.icai.org/",
-    salary_range: "₹4-75 LPA",
-    career_progression: "Article Trainee → CA → Senior Manager → Partner",
-    skills_required: ["Financial Analysis", "Taxation", "Auditing", "Compliance", "Business Advisory"]
+    skills_required: ["Medical Knowledge", "Diagnosis", "Patient Care", "Communication", "Emergency Response"],
+    higher_studies: ["MD/MS", "DM/MCh", "Fellowship", "PhD Medical Research"],
+    career_paths: ["Super Specialist", "Medical Research", "Hospital Administration", "Public Health"]
   },
   {
     id: 4,
-    career_name: "Financial Analyst & Investment Banker",
-    stream: "commerce",
-    required_degree: "BBA/MBA",
-    description: "This sector offers high earning potential and performance-driven career paths. Career growth is tied to certifications like the CFA, and investment bankers can earn substantial bonuses, with firm prestige being a critical factor.",
-    keywords: ["financial analysis", "investment", "markets", "analytical thinking", "client management"],
-    website: "https://en.wikipedia.org/wiki/Financial_analyst",
-    salary_range: "₹8-200 LPA",
-    career_progression: "Analyst → Associate → Vice President → Director → Managing Director",
-    skills_required: ["Financial Modeling", "Market Analysis", "Client Relations", "Risk Assessment"]
+    career_name: "Civil Engineer",
+    stream: "science",
+    required_degree: "B.Tech",
+    description: "Civil engineers design, build, and maintain infrastructure projects. Growing demand in urban development, smart cities, and sustainable construction projects.",
+    keywords: ["construction", "infrastructure", "design", "project management", "sustainability"],
+    website: "https://en.wikipedia.org/wiki/Civil_engineering",
+    salary_range: "₹3-40 LPA",
+    career_progression: "Junior Engineer → Project Engineer → Project Manager → Chief Engineer",
+    skills_required: ["CAD Software", "Project Management", "Structural Analysis", "Site Management"],
+    higher_studies: ["M.Tech Civil", "MBA Infrastructure", "MS Structural Engineering"],
+    career_paths: ["Urban Planner", "Construction Manager", "Infrastructure Consultant", "Government Engineer"]
   },
   {
     id: 5,
+    career_name: "Mechanical Engineer",
+    stream: "science",
+    required_degree: "B.Tech",
+    description: "Mechanical engineers work in diverse industries from automotive to aerospace. Excellent opportunities in manufacturing, robotics, and renewable energy sectors.",
+    keywords: ["machinery", "design", "manufacturing", "robotics", "automotive"],
+    website: "https://en.wikipedia.org/wiki/Mechanical_engineering",
+    salary_range: "₹3-45 LPA",
+    career_progression: "Design Engineer → Senior Engineer → Engineering Manager → Chief Engineer",
+    skills_required: ["CAD/CAM", "Thermodynamics", "Material Science", "Manufacturing Processes"],
+    higher_studies: ["M.Tech Mechanical", "MBA Operations", "MS Mechanical Engineering"],
+    career_paths: ["R&D Engineer", "Production Manager", "Automotive Designer", "Robotics Engineer"]
+  },
+  {
+    id: 6,
+    career_name: "Research Scientist",
+    stream: "science",
+    required_degree: "B.Sc",
+    description: "Research scientists conduct scientific investigations to advance knowledge in their field. Opportunities in academic institutions, government labs, and private research organizations.",
+    keywords: ["research", "experimentation", "analysis", "discovery", "innovation"],
+    website: "https://en.wikipedia.org/wiki/Scientist",
+    salary_range: "₹4-80 LPA",
+    career_progression: "Research Associate → Scientist → Senior Scientist → Principal Scientist",
+    skills_required: ["Research Methodology", "Data Analysis", "Scientific Writing", "Lab Techniques"],
+    higher_studies: ["M.Sc", "PhD", "Post-Doc", "Research Fellowship"],
+    career_paths: ["ISRO/DRDO Scientist", "University Professor", "Industry R&D Head", "Scientific Consultant"]
+  },
+  {
+    id: 7,
     career_name: "Architect",
     stream: "science",
     required_degree: "B.Arch",
@@ -409,10 +446,12 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Architect",
     salary_range: "₹3-50 LPA",
     career_progression: "Junior Architect → Architect → Senior Architect → Principal Architect",
-    skills_required: ["Design Software", "Project Management", "Building Codes", "Creative Design", "3D Visualization"]
+    skills_required: ["Design Software", "Project Management", "Building Codes", "Creative Design", "3D Visualization"],
+    higher_studies: ["M.Arch", "Urban Planning", "PhD Architecture"],
+    career_paths: ["Urban Planner", "Interior Designer", "Landscape Architect", "Sustainable Design Consultant"]
   },
   {
-    id: 6,
+    id: 8,
     career_name: "Pharmacist",
     stream: "science",
     required_degree: "B.Pharm",
@@ -421,10 +460,84 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Pharmacist",
     salary_range: "₹2-25 LPA",
     career_progression: "Staff Pharmacist → Clinical Pharmacist → Pharmacy Manager → Director",
-    skills_required: ["Drug Knowledge", "Patient Counseling", "Quality Control", "Regulatory Compliance"]
+    skills_required: ["Drug Knowledge", "Patient Counseling", "Quality Control", "Regulatory Compliance"],
+    higher_studies: ["M.Pharm", "Pharm.D", "MBA Pharma", "PhD Pharmacy"],
+    career_paths: ["Drug Inspector", "Pharmaceutical Research", "Hospital Pharmacist", "Regulatory Affairs"]
   },
   {
-    id: 7,
+    id: 9,
+    career_name: "Pilot",
+    stream: "science",
+    required_degree: "B.Tech/B.Sc",
+    description: "Commercial pilots fly aircraft for airlines, charter companies, and other organizations. Requires specialized training and licensing with excellent career prospects and high earning potential.",
+    keywords: ["aviation", "flying", "navigation", "safety", "travel"],
+    website: "https://en.wikipedia.org/wiki/Aircraft_pilot",
+    salary_range: "₹10-80 LPA",
+    career_progression: "Trainee Pilot → First Officer → Captain → Chief Pilot",
+    skills_required: ["Flight Operations", "Navigation", "Communication", "Weather Analysis", "Emergency Procedures"],
+    higher_studies: ["CPL", "ATPL", "Aviation Management", "Aeronautical Engineering"],
+    career_paths: ["Commercial Airline Pilot", "Charter Pilot", "Flight Instructor", "Aviation Consultant"]
+  },
+
+  // Commerce Stream Careers
+  {
+    id: 10,
+    career_name: "Chartered Accountant (CA)",
+    stream: "commerce",
+    required_degree: "B.Com",
+    description: "Regulated by the ICAI, this profession offers a clear and lucrative career path with steep salary growth. Working for a 'Big 4' firm provides a significant salary advantage, and earnings are boosted by passing exams on the first attempt.",
+    keywords: ["numbers", "financial calculations", "detail-oriented", "data analysis", "managing resources"],
+    website: "https://www.icai.org/",
+    salary_range: "₹4-75 LPA",
+    career_progression: "Article Trainee → CA → Senior Manager → Partner",
+    skills_required: ["Financial Analysis", "Taxation", "Auditing", "Compliance", "Business Advisory"],
+    higher_studies: ["MBA Finance", "CFA", "FRM", "International CA"],
+    career_paths: ["CFO", "Tax Consultant", "Investment Banking", "Financial Controller"]
+  },
+  {
+    id: 11,
+    career_name: "Financial Analyst",
+    stream: "commerce",
+    required_degree: "BBA/MBA",
+    description: "This sector offers high earning potential and performance-driven career paths. Career growth is tied to certifications like the CFA, and investment bankers can earn substantial bonuses, with firm prestige being a critical factor.",
+    keywords: ["financial analysis", "investment", "markets", "analytical thinking", "client management"],
+    website: "https://en.wikipedia.org/wiki/Financial_analyst",
+    salary_range: "₹8-200 LPA",
+    career_progression: "Analyst → Associate → Vice President → Director → Managing Director",
+    skills_required: ["Financial Modeling", "Market Analysis", "Client Relations", "Risk Assessment"],
+    higher_studies: ["CFA", "MBA Finance", "FRM", "MS Finance"],
+    career_paths: ["Investment Banking", "Equity Research", "Portfolio Management", "Private Equity"]
+  },
+  {
+    id: 12,
+    career_name: "Company Secretary (CS)",
+    stream: "commerce",
+    required_degree: "B.Com",
+    description: "Company Secretaries ensure legal compliance and corporate governance. Growing demand in corporate sector with excellent opportunities in regulatory compliance.",
+    keywords: ["corporate law", "compliance", "governance", "legal", "administration"],
+    website: "https://www.icsi.edu/",
+    salary_range: "₹3-40 LPA",
+    career_progression: "CS Trainee → Company Secretary → GM Legal → Director Legal",
+    skills_required: ["Corporate Law", "Compliance", "Documentation", "Legal Research"],
+    higher_studies: ["LLB", "MBA", "Specialized Certifications"],
+    career_paths: ["Legal Head", "Compliance Officer", "Corporate Governance Expert", "Legal Consultant"]
+  },
+  {
+    id: 13,
+    career_name: "Investment Banker",
+    stream: "commerce",
+    required_degree: "MBA",
+    description: "Investment bankers help companies raise capital and provide financial advisory services. High-pressure but high-reward career with excellent earning potential.",
+    keywords: ["finance", "mergers", "acquisitions", "capital markets", "advisory"],
+    website: "https://en.wikipedia.org/wiki/Investment_banking",
+    salary_range: "₹15-300 LPA",
+    career_progression: "Analyst → Associate → VP → Director → MD",
+    skills_required: ["Financial Modeling", "Valuation", "Deal Structuring", "Client Management"],
+    higher_studies: ["CFA", "MBA Finance", "MS Finance"],
+    career_paths: ["Private Equity", "Hedge Funds", "Corporate Finance", "Financial Consulting"]
+  },
+  {
+    id: 14,
     career_name: "Marketing Manager",
     stream: "commerce",
     required_degree: "BBA/MBA",
@@ -433,10 +546,12 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Marketing_manager",
     salary_range: "₹4-40 LPA",
     career_progression: "Marketing Executive → Marketing Manager → Senior Manager → Marketing Director",
-    skills_required: ["Digital Marketing", "Brand Strategy", "Market Research", "Communication", "Analytics"]
+    skills_required: ["Digital Marketing", "Brand Strategy", "Market Research", "Communication", "Analytics"],
+    higher_studies: ["MBA Marketing", "Digital Marketing Certifications", "Brand Management"],
+    career_paths: ["Chief Marketing Officer", "Brand Manager", "Digital Marketing Head", "Marketing Consultant"]
   },
   {
-    id: 8,
+    id: 15,
     career_name: "Human Resources Manager",
     stream: "commerce",
     required_degree: "BBA/MBA",
@@ -445,10 +560,42 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Human_resources_manager",
     salary_range: "₹3-35 LPA",
     career_progression: "HR Executive → HR Manager → Senior Manager → HR Director",
-    skills_required: ["Talent Management", "Employee Relations", "Policy Development", "Performance Management"]
+    skills_required: ["Talent Management", "Employee Relations", "Policy Development", "Performance Management"],
+    higher_studies: ["MBA HR", "XLRI Programs", "HR Certifications"],
+    career_paths: ["Chief People Officer", "Talent Acquisition Head", "HR Business Partner", "Organization Development"]
   },
   {
-    id: 9,
+    id: 16,
+    career_name: "Economist",
+    stream: "commerce",
+    required_degree: "B.A. Economics",
+    description: "Economists study market trends and economic policies. Opportunities in government, research institutions, and private sector consulting.",
+    keywords: ["economics", "policy", "research", "analysis", "markets"],
+    website: "https://en.wikipedia.org/wiki/Economist",
+    salary_range: "₹5-50 LPA",
+    career_progression: "Research Associate → Economist → Senior Economist → Chief Economist",
+    skills_required: ["Economic Analysis", "Statistical Methods", "Research", "Policy Understanding"],
+    higher_studies: ["MA Economics", "PhD Economics", "MBA"],
+    career_paths: ["RBI Officer", "Policy Analyst", "Economic Consultant", "Research Director"]
+  },
+  {
+    id: 17,
+    career_name: "Actuary",
+    stream: "commerce",
+    required_degree: "B.Sc/B.Com Statistics",
+    description: "Actuaries assess risk and uncertainty in insurance and financial services. Highly specialized field with excellent earning potential.",
+    keywords: ["statistics", "risk assessment", "insurance", "mathematics", "probability"],
+    website: "https://en.wikipedia.org/wiki/Actuary",
+    salary_range: "₹8-80 LPA",
+    career_progression: "Actuarial Analyst → Actuary → Senior Actuary → Chief Actuary",
+    skills_required: ["Statistics", "Risk Modeling", "Insurance Knowledge", "Mathematical Analysis"],
+    higher_studies: ["Actuarial Certifications", "MBA Risk Management", "MS Statistics"],
+    career_paths: ["Insurance Executive", "Risk Manager", "Pension Consultant", "Investment Risk Analyst"]
+  },
+
+  // Arts Stream Careers
+  {
+    id: 18,
     career_name: "Journalist",
     stream: "arts",
     required_degree: "B.A. (Journalism/Mass Communication)",
@@ -457,10 +604,12 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Journalist",
     salary_range: "₹2-50 LPA",
     career_progression: "Reporter → Senior Reporter → Editor → News Director",
-    skills_required: ["Writing", "Research", "Interviewing", "News Gathering", "Digital Media"]
+    skills_required: ["Writing", "Research", "Interviewing", "News Gathering", "Digital Media"],
+    higher_studies: ["MA Journalism", "MBA Media Management", "Specialized Reporting"],
+    career_paths: ["News Anchor", "Editor-in-Chief", "Media Entrepreneur", "Documentary Filmmaker"]
   },
   {
-    id: 10,
+    id: 19,
     career_name: "Lawyer",
     stream: "arts",
     required_degree: "LL.B.",
@@ -469,6 +618,122 @@ export const careers = [
     website: "https://en.wikipedia.org/wiki/Lawyer",
     salary_range: "₹3-100 LPA",
     career_progression: "Junior Associate → Associate → Senior Associate → Partner",
-    skills_required: ["Legal Research", "Court Advocacy", "Contract Drafting", "Client Advisory", "Case Management"]
+    skills_required: ["Legal Research", "Court Advocacy", "Contract Drafting", "Client Advisory", "Case Management"],
+    higher_studies: ["LLM", "MBA Law", "Specialized Legal Certifications"],
+    career_paths: ["Judge", "Corporate Legal Head", "Legal Consultant", "Public Prosecutor"]
+  },
+  {
+    id: 20,
+    career_name: "UI/UX Designer",
+    stream: "arts",
+    required_degree: "BFA/B.Des",
+    description: "UI/UX designers create user-friendly digital experiences. High demand in tech industry with excellent growth prospects in digital transformation era.",
+    keywords: ["design", "user experience", "creativity", "technology", "problem-solving"],
+    website: "https://en.wikipedia.org/wiki/User_experience_design",
+    salary_range: "₹4-60 LPA",
+    career_progression: "Junior Designer → UI/UX Designer → Senior Designer → Design Lead",
+    skills_required: ["Design Tools", "User Research", "Prototyping", "Visual Design", "User Psychology"],
+    higher_studies: ["M.Des", "MBA Design", "HCI Certifications"],
+    career_paths: ["Product Design Head", "Design Director", "UX Consultant", "Design Entrepreneur"]
+  },
+  {
+    id: 21,
+    career_name: "Psychologist",
+    stream: "arts",
+    required_degree: "B.A. Psychology",
+    description: "Psychologists study human behavior and mental processes. Growing awareness about mental health creates excellent opportunities in healthcare and counseling.",
+    keywords: ["human behavior", "mental health", "counseling", "research", "therapy"],
+    website: "https://en.wikipedia.org/wiki/Psychologist",
+    salary_range: "₹3-40 LPA",
+    career_progression: "Counselor → Psychologist → Senior Psychologist → Clinical Director",
+    skills_required: ["Counseling", "Assessment", "Therapy Techniques", "Research Methods"],
+    higher_studies: ["MA Psychology", "PhD Psychology", "Clinical Psychology"],
+    career_paths: ["Clinical Psychologist", "Organizational Psychologist", "Research Psychologist", "Private Practice"]
+  },
+  {
+    id: 22,
+    career_name: "Fashion Designer",
+    stream: "arts",
+    required_degree: "B.Des Fashion",
+    description: "Fashion designers create clothing and accessory designs. Opportunities in fashion houses, retail brands, and independent design studios.",
+    keywords: ["fashion", "creativity", "design", "trends", "textiles"],
+    website: "https://en.wikipedia.org/wiki/Fashion_design",
+    salary_range: "₹3-50 LPA",
+    career_progression: "Design Assistant → Fashion Designer → Senior Designer → Creative Director",
+    skills_required: ["Design Skills", "Trend Analysis", "Pattern Making", "Textile Knowledge"],
+    higher_studies: ["M.Des Fashion", "Fashion Business Management", "International Fashion Programs"],
+    career_paths: ["Fashion Brand Owner", "Costume Designer", "Fashion Consultant", "Fashion Stylist"]
+  },
+  {
+    id: 23,
+    career_name: "Social Worker",
+    stream: "arts",
+    required_degree: "B.A. Social Work",
+    description: "Social workers help individuals and communities overcome challenges. Opportunities in NGOs, government agencies, and healthcare organizations.",
+    keywords: ["helping others", "community service", "social justice", "counseling", "advocacy"],
+    website: "https://en.wikipedia.org/wiki/Social_work",
+    salary_range: "₹2-25 LPA",
+    career_progression: "Social Worker → Senior Social Worker → Program Manager → Director",
+    skills_required: ["Counseling", "Community Outreach", "Program Management", "Advocacy"],
+    higher_studies: ["MSW", "MBA Social Entrepreneurship", "Development Studies"],
+    career_paths: ["NGO Head", "Policy Maker", "Community Development Specialist", "Social Entrepreneur"]
+  },
+  {
+    id: 24,
+    career_name: "Digital Marketing Specialist",
+    stream: "arts",
+    required_degree: "B.A./BBA",
+    description: "Digital marketing specialists promote brands online using various digital channels. High growth field with excellent opportunities across industries.",
+    keywords: ["digital marketing", "social media", "content creation", "analytics", "online advertising"],
+    website: "https://en.wikipedia.org/wiki/Digital_marketing",
+    salary_range: "₹3-40 LPA",
+    career_progression: "Digital Marketing Executive → Specialist → Manager → Head of Digital",
+    skills_required: ["SEO/SEM", "Social Media Marketing", "Content Strategy", "Analytics", "Digital Advertising"],
+    higher_studies: ["MBA Digital Marketing", "Google/Facebook Certifications", "Data Analytics"],
+    career_paths: ["Digital Marketing Head", "Growth Hacker", "Social Media Entrepreneur", "Digital Consultant"]
+  },
+
+  // Government Jobs (All Streams)
+  {
+    id: 25,
+    career_name: "IAS Officer",
+    stream: "all",
+    required_degree: "Any Graduate",
+    description: "IAS officers are part of India's premier civil service, responsible for policy implementation and administration at various levels of government.",
+    keywords: ["civil service", "administration", "policy", "governance", "public service"],
+    website: "https://upsc.gov.in/",
+    salary_range: "₹8-50 LPA",
+    career_progression: "Sub-Collector → Collector → Commissioner → Secretary → Chief Secretary",
+    skills_required: ["Leadership", "Policy Analysis", "Public Administration", "Decision Making"],
+    higher_studies: ["Masters in Public Administration", "Policy Studies", "International Relations"],
+    career_paths: ["District Collector", "Secretary to Government", "Ambassador", "Policy Advisor"]
+  },
+  {
+    id: 26,
+    career_name: "Bank PO",
+    stream: "all",
+    required_degree: "Any Graduate",
+    description: "Bank Probationary Officers manage banking operations, customer relations, and financial services in public sector banks.",
+    keywords: ["banking", "finance", "customer service", "operations", "management"],
+    website: "https://www.ibps.in/",
+    salary_range: "₹4-30 LPA",
+    career_progression: "PO → Assistant Manager → Manager → AGM → GM",
+    skills_required: ["Banking Operations", "Financial Analysis", "Customer Relations", "Leadership"],
+    higher_studies: ["MBA Banking", "CAIIB", "Financial Certifications"],
+    career_paths: ["Branch Manager", "Regional Head", "Chief Manager", "Banking Consultant"]
+  },
+  {
+    id: 27,
+    career_name: "Software Developer (IT)",
+    stream: "science",
+    required_degree: "BCA/B.Sc CS",
+    description: "Software developers create applications and systems using programming languages. High demand in IT industry with excellent global opportunities.",
+    keywords: ["programming", "software development", "coding", "applications", "technology"],
+    website: "https://en.wikipedia.org/wiki/Software_developer",
+    salary_range: "₹3-80 LPA",
+    career_progression: "Trainee Developer → Developer → Senior Developer → Tech Lead → Architect",
+    skills_required: ["Programming Languages", "Problem Solving", "Software Design", "Database Management"],
+    higher_studies: ["MCA", "MS Computer Science", "MBA Tech Management"],
+    career_paths: ["Full Stack Developer", "Mobile App Developer", "DevOps Engineer", "Tech Entrepreneur"]
   }
 ];

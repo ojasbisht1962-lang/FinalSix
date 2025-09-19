@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ExpandableCard from '../components/ExpandableCard';
+import CareerFlowChart from '../components/CareerFlowChart';
 import { careers } from '../data/educationalData';
+import { careerImageResolver } from '../utils/careerImageResolver';
 
 const CareersPage = () => {
   const [selectedStream, setSelectedStream] = useState('');
@@ -44,13 +46,7 @@ const CareersPage = () => {
   ];
 
   const getCareerImage = (careerName) => {
-    const images = [
-      'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    ];
-    return images[Math.floor(Math.random() * images.length)];
+    return careerImageResolver(careerName);
   };
 
   const renderExpandedContent = (career) => (
@@ -124,45 +120,54 @@ const CareersPage = () => {
     const currentStream = streamInfo[selectedStream];
 
     return (
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg mb-8 border border-blue-200">
-        <div className="flex items-center mb-4">
-          <div className="text-3xl mr-3">
-            {streams.find(s => s.value === selectedStream)?.icon}
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">{currentStream.name} → {selectedDegree}</h3>
-            <p className="text-sm text-gray-600">Your selected educational pathway</p>
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-2">About This Stream</h4>
-            <p className="text-gray-700 text-sm mb-4">{currentStream.description}</p>
-            
-            <h4 className="font-semibold text-gray-900 mb-2">Key Subjects</h4>
-            <div className="flex flex-wrap gap-2">
-              {currentStream.subjects.map((subject, index) => (
-                <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-                  {subject}
-                </span>
-              ))}
+      <div className="space-y-8">
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+          <div className="flex items-center mb-4">
+            <div className="text-3xl mr-3">
+              {streams.find(s => s.value === selectedStream)?.icon}
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">{currentStream.name} → {selectedDegree}</h3>
+              <p className="text-sm text-gray-600">Your selected educational pathway</p>
             </div>
           </div>
           
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-2">Degree Requirements</h4>
-            <div className="bg-white p-4 rounded border">
-              <div className="flex items-center mb-2">
-                <span className="text-lg mr-2">🎓</span>
-                <span className="font-medium text-gray-900">{selectedDegree}</span>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-2">About This Stream</h4>
+              <p className="text-gray-700 text-sm mb-4">{currentStream.description}</p>
+              
+              <h4 className="font-semibold text-gray-900 mb-2">Key Subjects</h4>
+              <div className="flex flex-wrap gap-2">
+                {currentStream.subjects.map((subject, index) => (
+                  <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                    {subject}
+                  </span>
+                ))}
               </div>
-              <p className="text-sm text-gray-600">
-                This degree will provide you with the necessary foundation for the career opportunities shown below.
-              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-2">Degree Requirements</h4>
+              <div className="bg-white p-4 rounded border">
+                <div className="flex items-center mb-2">
+                  <span className="text-lg mr-2">🎓</span>
+                  <span className="font-medium text-gray-900">{selectedDegree}</span>
+                </div>
+                <p className="text-sm text-gray-600">
+                  This degree will provide you with the necessary foundation for the career opportunities shown below.
+                </p>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Career Flowchart */}
+        <CareerFlowChart 
+          selectedStream={selectedStream}
+          selectedDegree={selectedDegree}
+          relevantCareers={filteredCareers}
+        />
       </div>
     );
   };
