@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ExpandableCard from '../components/ExpandableCard';
 import { colleges } from '../data/educationalData';
+import { getCollegeImageWithFallback } from '../utils/imageResolver';
 
 const CollegesPage = () => {
   const [selectedDegree, setSelectedDegree] = useState('all');
@@ -18,15 +19,8 @@ const CollegesPage = () => {
     return degreeMatch && typeMatch;
   });
 
-  const getCollegeImage = (name) => {
-    // Default placeholder images based on college type
-    const images = [
-      'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    ];
-    return images[Math.floor(Math.random() * images.length)];
+  const getCollegeImage = (collegeId) => {
+    return getCollegeImageWithFallback(collegeId);
   };
 
   const renderExpandedContent = (college) => (
@@ -118,7 +112,7 @@ const CollegesPage = () => {
               key={college.id || index}
               title={college.name}
               subtitle={college.location}
-              image={getCollegeImage(college.name)}
+              image={getCollegeImage(college.id)}
               category={college.type}
               tags={college.degrees_offered}
               expandedContent={renderExpandedContent(college)}

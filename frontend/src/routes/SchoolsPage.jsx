@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ExpandableCard from '../components/ExpandableCard';
 import { schools } from '../data/educationalData';
+import { getSchoolImageWithFallback } from '../utils/imageResolver';
 
 const SchoolsPage = () => {
   const [selectedStream, setSelectedStream] = useState('all');
@@ -12,14 +13,8 @@ const SchoolsPage = () => {
     return streamMatch && typeMatch;
   });
 
-  const getSchoolImage = (name) => {
-    const images = [
-      'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    ];
-    return images[Math.floor(Math.random() * images.length)];
+  const getSchoolImage = (schoolId) => {
+    return getSchoolImageWithFallback(schoolId);
   };
 
   const renderExpandedContent = (school) => (
@@ -111,7 +106,7 @@ const SchoolsPage = () => {
               key={school.id || index}
               title={school.name}
               subtitle={school.location}
-              image={getSchoolImage(school.name)}
+              image={getSchoolImage(school.id)}
               category={school.type}
               tags={school.streams_offered}
               expandedContent={renderExpandedContent(school)}
