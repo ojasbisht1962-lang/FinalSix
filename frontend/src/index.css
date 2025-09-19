@@ -29,3 +29,13 @@ code {
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-in-out;
 }
+
+/* Custom animations for AI chatbot section */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+}
