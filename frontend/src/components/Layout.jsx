@@ -15,6 +15,7 @@ const Layout = ({ children }) => {
     { name: 'College Section', href: '/colleges', current: location.pathname === '/colleges' },
     { name: 'School Section', href: '/schools', current: location.pathname === '/schools' },
     { name: 'Notifications', href: '/notifications', current: location.pathname === '/notifications' },
+    { name: 'Loans', href: '/loans', current: location.pathname === '/loans' },
   ];
 
   const toggleMenu = () => {

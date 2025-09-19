@@ -12,6 +12,8 @@ const Navbar = () => {
     { path: "/careers", label: "Career Guidance" },
     { path: "/colleges", label: "Colleges" },
     { path: "/schools", label: "Schools" },
+    { path: "/notifications", label: "Notifications" },
+    { path: "/loans", label: "Loans" },
     { path: "/dashboard", label: "Dashboard" },
   ];
 
@@ -23,7 +25,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center">
             {/* Try to load logo, fallback to text logo if not found */}
             <img 
-              src="/final-project/frontend/public/Logo.png" 
+              src=" /final-project/frontend/public/Logo.png" 
               alt="CareerCompass Logo" 
               className="h-5 w-auto"
               onError={(e) => {

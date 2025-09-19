@@ -12,6 +12,7 @@ import CareersPage from "./routes/CareersPage";
 import CollegesPage from "./routes/CollegesPage";
 import SchoolsPage from "./routes/SchoolsPage";
 import NotificationsPage from "./routes/NotificationsPage";
+import LoansPage from "./routes/LoansPage";
 import "./App.css";
 import "./index.css";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/schools" element={<SchoolsPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/loans" element={<LoansPage />} />
         </Routes>
       </Layout>
     </Router>
