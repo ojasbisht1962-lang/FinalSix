@@ -31,19 +31,8 @@ const Layout = ({ children }) => {
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0">
               <div className="flex items-center">
-                {/* Try to load logo, fallback to text logo if not found */}
-                <img 
-                  src="/PicFinal.png" 
-                  alt="CareerCompass Logo" 
-                  className="h-16 w-auto"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextElementSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="w-80 h-80 bg-blue-600 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
-                  <span className="text-white font-bold text-lg">CC</span>
-                </div>
+                <span className="text-orange-500 font-bold">CAREER</span>
+                <span className="text-blue-600 font-bold ml-1">COMPASS</span>
               </div>
             </Link>
 
