@@ -18,7 +18,10 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 z-50">
+    <nav 
+      className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 shadow-lg fixed w-full top-0 z-50 border-b border-slate-600"
+      style={{ background: 'linear-gradient(to right, #1e293b, #374151, #1e293b)' }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -33,29 +36,29 @@ const Navbar = () => {
                 e.target.nextElementSibling.style.display = 'flex';
               }}
             />
-            <div className="w-50 h-50 bg-blue-600 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+            <div className="w-50 h-50 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md" style={{display: 'none'}}>
               <span className="text-white font-bold text-lg">CC</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex space-x-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   location.pathname === item.path
-                    ? "bg-blue-100 text-blue-600"
-                    : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
-                } transition-colors`}
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg transform scale-105"
+                    : "text-slate-200 hover:text-white hover:bg-slate-600/50 hover:shadow-md"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+              className="bg-gradient-to-r from-emerald-500 to-cyan-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:from-emerald-600 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Sign In
             </Link>
@@ -64,7 +67,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+            className="md:hidden p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-600/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 transition-colors"
           >
             <span className="sr-only">Open menu</span>
             {/* Hamburger icon */}
@@ -97,16 +100,16 @@ const Navbar = () => {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800/95 backdrop-blur-sm border-t border-slate-600">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
                     location.pathname === item.path
-                      ? "bg-blue-100 text-blue-600"
-                      : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
-                  } transition-colors`}
+                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg"
+                      : "text-slate-200 hover:text-white hover:bg-slate-600/50"
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
@@ -114,7 +117,7 @@ const Navbar = () => {
               ))}
               <Link
                 to="/login"
-                className="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-lg text-base font-medium hover:bg-blue-700 transition-colors mt-4"
+                className="block w-full text-center bg-gradient-to-r from-emerald-500 to-cyan-600 text-white px-6 py-3 rounded-lg text-base font-medium hover:from-emerald-600 hover:to-cyan-700 transition-all duration-300 shadow-lg mt-4"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Sign In

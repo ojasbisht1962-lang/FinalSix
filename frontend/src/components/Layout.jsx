@@ -28,28 +28,31 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <nav 
+        className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 shadow-lg border-b border-slate-600 sticky top-0 z-50"
+        style={{ background: 'linear-gradient(to right, #1e293b, #374151, #1e293b)' }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center flex-shrink-0">
               <div className="flex items-center">
-                <span className="text-orange-500 font-bold">CAREER</span>
-                <span className="text-blue-600 font-bold ml-1">COMPASS</span>
+                <span className="text-orange-400 font-bold text-lg">CAREER</span>
+                <span className="text-cyan-400 font-bold ml-1 text-lg">COMPASS</span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
+              <div className="ml-10 flex items-baseline space-x-2">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                       item.current
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg transform scale-105'
+                        : 'text-slate-200 hover:text-white hover:bg-slate-600/50 hover:shadow-md'
                     }`}
                   >
                     {item.name}
@@ -60,19 +63,19 @@ const Layout = ({ children }) => {
 
             {/* Right side buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+              <button className="p-2 text-slate-300 hover:text-white hover:bg-slate-600/50 rounded-lg transition-all duration-300">
                 <Search className="h-5 w-5" />
               </button>
               
               {/* Authentication Section */}
               {isLoading ? (
-                <div className="animate-pulse bg-gray-200 rounded-lg h-10 w-24"></div>
+                <div className="animate-pulse bg-slate-600 rounded-lg h-10 w-24"></div>
               ) : isAuthenticated ? (
                 <UserProfile />
               ) : (
                 <Link
                   to="/login"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                  className="bg-gradient-to-r from-emerald-500 to-cyan-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:from-emerald-600 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2"
                 >
                   <User className="h-4 w-4" />
                   <span>Sign In</span>
@@ -84,7 +87,7 @@ const Layout = ({ children }) => {
             <div className="md:hidden">
               <button
                 onClick={toggleMenu}
-                className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                className="p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-600/50 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300"
               >
                 {isMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -98,15 +101,15 @@ const Layout = ({ children }) => {
           {/* Mobile Navigation Menu */}
           {isMenuOpen && (
             <div className="md:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-800/95 backdrop-blur-sm border-t border-slate-600">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
                       item.current
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                        : 'text-slate-200 hover:text-white hover:bg-slate-600/50'
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -116,15 +119,15 @@ const Layout = ({ children }) => {
                 
                 {/* Mobile Authentication Section */}
                 {isLoading ? (
-                  <div className="animate-pulse bg-gray-200 rounded-lg h-10 w-full mt-4"></div>
+                  <div className="animate-pulse bg-slate-600 rounded-lg h-10 w-full mt-4"></div>
                 ) : isAuthenticated ? (
-                  <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                  <div className="mt-4 p-3 bg-slate-700/50 rounded-lg">
                     <UserProfile />
                   </div>
                 ) : (
                   <Link
                     to="/login"
-                    className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors mt-4"
+                    className="block px-4 py-3 rounded-lg text-base font-medium bg-gradient-to-r from-emerald-500 to-cyan-600 text-white hover:from-emerald-600 hover:to-cyan-700 transition-all duration-300 shadow-lg mt-4 text-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Sign In
