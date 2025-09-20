@@ -17,11 +17,11 @@ app = FastAPI(title="Career Guidance Backend")
 allowed_origins = [
     "http://localhost:3000", 
     "http://localhost:5173",
-    "https://vercel.app",  # Allow Vercel domains
-    "https://*.vercel.app"  # Allow all Vercel subdomains
+    "https://vercel.app",  # Base Vercel domain
+    "https://matricks-e4tw2ihgw-ojas-bishts-projects.vercel.app"  # Your specific frontend URL
 ]
 
-# Add production frontend URL when deployed
+# Add production frontend URL when deployed from environment variable
 frontend_url = os.getenv("FRONTEND_URL")
 if frontend_url:
     allowed_origins.append(frontend_url)

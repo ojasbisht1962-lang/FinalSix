@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import QuestionCard from '../QuestionCard';
 import Loader from '../Loader';
+import API_CONFIG from '../../config/api';
 
 const QuizPage = () => {
     console.log("🔥 QuizPage component loaded!");
@@ -27,10 +28,11 @@ const QuizPage = () => {
             console.log("Should fetch questions?", classLevel && (classLevel === 'below-10' || stream));
             
             setLoading(true);
-            let url = `http://localhost:8000/quiz/questions?class_level=${classLevel}`;
+            const params = { class_level: classLevel };
             if (classLevel === '10th-pass' && stream) {
-                url += `&stream=${stream}`;
+                params.stream = stream;
             }
+            const url = API_CONFIG.getUrlWithParams(API_CONFIG.ENDPOINTS.QUIZ_QUESTIONS, params);
             console.log("API URL:", url);
             
             try {
@@ -81,7 +83,7 @@ const QuizPage = () => {
                 stream: stream,
                 answers: Object.entries(answers).map(([question_id, answer]) => ({ question_id, answer })),
             };
-            await axios.post('http://localhost:8000/answers/submit', payload);
+            await axios.post(API_CONFIG.getFullUrl(API_CONFIG.ENDPOINTS.SUBMIT_ANSWERS), payload);
             navigate(`/suggestions?user_id=${userId}`);
         } catch (error) {
             console.error("Failed to submit answers:", error);
