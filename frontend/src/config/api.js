@@ -18,7 +18,11 @@ const API_CONFIG = {
   },
 
   // Helper function to get full URL
-  getFullUrl: (endpoint) => `${API_CONFIG.BASE_URL}${endpoint}`,
+  getFullUrl: (endpoint) => {
+    const url = `${API_CONFIG.BASE_URL}${endpoint}`;
+    console.log('🔍 API Call:', url);
+    return url;
+  },
 
   // Helper function to get endpoint with query params
   getUrlWithParams: (endpoint, params = {}) => {
@@ -28,8 +32,17 @@ const API_CONFIG = {
         url.searchParams.append(key, params[key]);
       }
     });
-    return url.toString();
+    const finalUrl = url.toString();
+    console.log('🔍 API Call with params:', finalUrl);
+    return finalUrl;
   }
 };
+
+// Debug logging to see what URL is being used
+console.log('🔧 API_CONFIG loaded:', {
+  BASE_URL: API_CONFIG.BASE_URL,
+  MODE: import.meta.env.MODE,
+  VITE_API_URL: import.meta.env.VITE_API_URL
+});
 
 export default API_CONFIG;
