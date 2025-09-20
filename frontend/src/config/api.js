@@ -6,9 +6,27 @@ const API_CONFIG = {
   // API endpoints
   ENDPOINTS: {
     QUIZ_QUESTIONS: '/quiz/questions',
-    SUBMIT_ANSWERS: '/answers/submit',
+    SUBMIT_ANSWERS: '/answers/submit', 
     QUIZ_HISTORY: '/quiz/history',
-    SUGGESTIONS: '/suggestions/get'
+    SUGGESTIONS: '/suggestions/get',
+    USERS: '/users',
+    CAREERS: '/careers',
+    COLLEGES: '/colleges', 
+    SCHOOLS: '/schools'
+  },
+
+  // Helper function to get full URL
+  getFullUrl: (endpoint) => `${API_CONFIG.BASE_URL}${endpoint}`,
+
+  // Helper function to get endpoint with query params
+  getUrlWithParams: (endpoint, params = {}) => {
+    const url = new URL(`${API_CONFIG.BASE_URL}${endpoint}`);
+    Object.keys(params).forEach(key => {
+      if (params[key] !== undefined && params[key] !== null) {
+        url.searchParams.append(key, params[key]);
+      }
+    });
+    return url.toString();
   }
 };
 

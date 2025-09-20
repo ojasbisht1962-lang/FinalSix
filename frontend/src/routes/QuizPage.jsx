@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import API_CONFIG from '../config/api';
 import QuestionCard from '../components/QuestionCard';
 
 const QuizPage = () => {
@@ -20,10 +21,12 @@ const QuizPage = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       setLoading(true);
-      let url = `http://localhost:8000/quiz/questions?class_level=${classLevel}`;
+      const params = { class_level: classLevel };
       if (classLevel === '10th-pass' && stream) {
-        url += `&stream=${stream}`;
+        params.stream = stream;
       }
+      
+      const url = API_CONFIG.getUrlWithParams(API_CONFIG.ENDPOINTS.QUIZ_QUESTIONS, params);
       
       try {
         const response = await axios.get(url);
@@ -79,7 +82,7 @@ const QuizPage = () => {
       
       console.log("Submitting quiz with payload:", payload);
       
-      const response = await axios.post('http://localhost:8000/answers/submit', payload);
+      const response = await axios.post(API_CONFIG.getFullUrl(API_CONFIG.ENDPOINTS.SUBMIT_ANSWERS), payload);
       console.log("Submission response:", response.data);
       
       // For Google users, the quiz is automatically saved in the database via the submit endpoint
