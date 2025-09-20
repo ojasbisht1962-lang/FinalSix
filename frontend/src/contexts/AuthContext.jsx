@@ -1,5 +1,6 @@
 // src/contexts/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import API_CONFIG from '../config/api';
 
 const AuthContext = createContext();
 
@@ -136,7 +137,7 @@ export const AuthProvider = ({ children }) => {
       if (user && user.type === 'google') {
         try {
           // Fetch quiz history from user_answers collection
-          const response = await fetch(`http://localhost:8000/quiz/history/${user.id}`);
+          const response = await fetch(API_CONFIG.getFullUrl(`${API_CONFIG.ENDPOINTS.QUIZ_HISTORY}/${user.id}`));
           if (response.ok) {
             const historyData = await response.json();
             return historyData.quizzes || [];

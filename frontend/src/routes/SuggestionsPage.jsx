@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../components/Loader';
+import API_CONFIG from '../config/api';
 
 const SuggestionsPage = () => {
   const [suggestions, setSuggestions] = useState(null);
@@ -18,7 +19,7 @@ const SuggestionsPage = () => {
         return;
       }
       try {
-        const response = await axios.get(`http://localhost:8000/suggestions/get?user_id=${userId}`);
+        const response = await axios.get(API_CONFIG.getUrlWithParams(API_CONFIG.ENDPOINTS.SUGGESTIONS, { user_id: userId }));
         setSuggestions(response.data);
       } catch (error) {
         console.error("Failed to fetch suggestions:", error);

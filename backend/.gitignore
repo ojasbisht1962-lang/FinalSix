@@ -3,7 +3,12 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-
+# .gitignore
+Blogv/
+**/Blogv/
+*.pyc
+__pycache__/
+.env
 # Virtual environments
 .venv/
 venv/

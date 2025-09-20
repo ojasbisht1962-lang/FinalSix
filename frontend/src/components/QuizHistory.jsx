@@ -1,6 +1,7 @@
 // src/components/QuizHistory.jsx
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import API_CONFIG from '../config/api';
 import { Calendar, Clock, BookOpen, ChevronDown, ChevronRight, Award, TrendingUp, RefreshCw } from 'lucide-react';
 
 const QuizHistory = () => {
@@ -24,7 +25,7 @@ const QuizHistory = () => {
     
     try {
       // Fetch quiz history from user_answers collection using the user's Google ID
-      const response = await fetch(`http://localhost:8000/quiz/history/${user.id}`);
+      const response = await fetch(API_CONFIG.getFullUrl(`${API_CONFIG.ENDPOINTS.QUIZ_HISTORY}/${user.id}`));
       
       if (!response.ok) {
         throw new Error('Failed to fetch quiz history');
