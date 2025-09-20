@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
 import QuestionCard from '../components/QuestionCard';
 
@@ -13,6 +14,8 @@ const QuizPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const userId = localStorage.getItem('user_id');
+  const { user, saveQuizResult } = useAuth();
+  const [quizStartTime] = useState(new Date());
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -78,6 +81,9 @@ const QuizPage = () => {
       
       const response = await axios.post('http://localhost:8000/answers/submit', payload);
       console.log("Submission response:", response.data);
+      
+      // For Google users, the quiz is automatically saved in the database via the submit endpoint
+      // No need to save locally since we fetch from database
       
       // Navigate to suggestions page
       navigate(`/suggestions?user_id=${currentUserId}`);

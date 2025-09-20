@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In Test</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <h1>Google Sign-In Test</h1>
+    <div id="g_id_onload"
+         data-client_id="1070985351952-kps4ke1t7rh1n6t2cp1vubr3i8tfabn9.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <script>
+        function handleCredentialResponse(response) {
+            const payload = JSON.parse(atob(response.credential.split('.')[1]));
+            console.log('Google Sign-In Success:', payload);
+            document.getElementById('result').innerHTML = 
+                '<h2>Success!</h2><pre>' + JSON.stringify(payload, null, 2) + '</pre>';
+        }
+    </script>
+    
+    <div id="result"></div>
+</body>
+</html>

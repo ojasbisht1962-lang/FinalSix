@@ -2,17 +2,33 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import FAQs from '../components/FAQs';
+import QuizHistory from '../components/QuizHistory';
 
 const DashboardPage = () => {
+  const { user } = useAuth();
+  
   return (
     <div className="container mx-auto p-8">
       <div className="text-center my-12">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-4">Your Career Dashboard</h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-4">
+          Welcome{user ? `, ${user.name}` : ''}!
+        </h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-          Welcome! Explore various career paths, take our personalized quiz, and find colleges and schools that fit your goals.
+          {user?.type === 'google' 
+            ? "Your personalized career dashboard with quiz history and recommendations."
+            : "Welcome! Explore various career paths, take our personalized quiz, and find colleges and schools that fit your goals."
+          }
         </p>
       </div>
+
+      {/* Quiz History Section - Only for Google Users */}
+      {user?.type === 'google' && (
+        <div className="mb-12">
+          <QuizHistory />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 text-center transform transition-all hover:scale-105">

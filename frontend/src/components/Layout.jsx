@@ -3,10 +3,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Search, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import UserProfile from './UserProfile';
 
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, isLoading } = useAuth();
 
   const navigation = [
     { name: 'Home Page', href: '/', current: location.pathname === '/' },
@@ -60,13 +63,21 @@ const Layout = ({ children }) => {
               <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
                 <Search className="h-5 w-5" />
               </button>
-              <Link
-                to="/login"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center space-x-2"
-              >
-                <User className="h-4 w-4" />
-                <span>Sign In</span>
-              </Link>
+              
+              {/* Authentication Section */}
+              {isLoading ? (
+                <div className="animate-pulse bg-gray-200 rounded-lg h-10 w-24"></div>
+              ) : isAuthenticated ? (
+                <UserProfile />
+              ) : (
+                <Link
+                  to="/login"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                >
+                  <User className="h-4 w-4" />
+                  <span>Sign In</span>
+                </Link>
+              )}
             </div>
 
             {/* Mobile menu button */}
@@ -102,13 +113,23 @@ const Layout = ({ children }) => {
                     {item.name}
                   </Link>
                 ))}
-                <Link
-                  to="/login"
-                  className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors mt-4"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
+                
+                {/* Mobile Authentication Section */}
+                {isLoading ? (
+                  <div className="animate-pulse bg-gray-200 rounded-lg h-10 w-full mt-4"></div>
+                ) : isAuthenticated ? (
+                  <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+                    <UserProfile />
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="block px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors mt-4"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                )}
               </div>
             </div>
           )}
