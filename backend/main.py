@@ -1,5 +1,6 @@
 # main.py
 
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.quiz import quiz_router
@@ -12,9 +13,22 @@ from routes.schools import schools_router # New import
 
 app = FastAPI(title="Career Guidance Backend")
 
+# Configure CORS for production and development
+allowed_origins = [
+    "http://localhost:3000", 
+    "http://localhost:5173",
+    "https://vercel.app",  # Allow Vercel domains
+    "https://*.vercel.app"  # Allow all Vercel subdomains
+]
+
+# Add production frontend URL when deployed
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    allowed_origins.append(frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=["*"],  # Allow all origins for now, can restrict later
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
