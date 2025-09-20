@@ -47,7 +47,8 @@ const SuggestionsPage = () => {
   const { suggested_stream, nearby_schools, suggested_degree, nearby_colleges, possible_careers } = suggestions;
 
   return (
-    <div className="container mx-auto p-8">
+    <div className="min-h-screen bg-blue-50">
+      <div className="container mx-auto p-8">
       <h2 className="text-5xl font-extrabold text-center text-blue-600 my-8">Your Personalized Guide</h2>
       
       {/* Suggestions for Below 10th */}
@@ -98,6 +99,7 @@ const SuggestionsPage = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

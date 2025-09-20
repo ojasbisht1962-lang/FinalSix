@@ -10,7 +10,8 @@ const DashboardPage = () => {
   const { user } = useAuth();
   
   return (
-    <div className="container mx-auto p-8">
+    <div className="min-h-screen bg-blue-50">
+      <div className="container mx-auto p-8">
       <div className="text-center my-12">
         <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 mb-4">
           Welcome{user ? `, ${user.name}` : ''}!
@@ -56,6 +57,7 @@ const DashboardPage = () => {
       <div className="my-10">
         <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center">Frequently Asked Questions</h3>
         <FAQs />
+      </div>
       </div>
     </div>
   );
