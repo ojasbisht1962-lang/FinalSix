@@ -19,7 +19,8 @@ allowed_origins = [
     "http://localhost:5173",
     "https://vercel.app",  # Base Vercel domain
     "https://matricks-e4tw2ihgw-ojas-bishts-projects.vercel.app",  # Previous frontend URL
-    "https://matricks-6w7mq4fto-ojas-bishts-projects.vercel.app"  # Latest frontend URL
+    "https://matricks-6w7mq4fto-ojas-bishts-projects.vercel.app",  # Previous frontend URL
+    "https://matricks-lh40n9oc5-ojas-bishts-projects.vercel.app"  # Latest frontend URL
 ]
 # Add production frontend URL when deployed from environment variable
 frontend_url = os.getenv("FRONTEND_URL")
