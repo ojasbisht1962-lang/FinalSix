@@ -1,7 +1,9 @@
 // API Configuration for production and development
+// Force redeploy: Environment variable should be https://matricks.onrender.com
 const API_CONFIG = {
-  // Use environment variable for production, fallback to localhost for development
-  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+  // Use environment variable for production, fallback to production URL if env var not set
+  BASE_URL: import.meta.env.VITE_API_URL || 
+           (import.meta.env.MODE === 'production' ? 'https://matricks.onrender.com' : 'http://localhost:8000'),
   
   // API endpoints
   ENDPOINTS: {
