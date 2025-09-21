@@ -202,6 +202,20 @@ const HomePage = () => {
     setChatMessages(prev => [...prev, aiMessage]);
   };
 
+  const scrollToChatbot = () => {
+    setShowChatbot(true);
+    // Wait a bit for the chatbot to render before scrolling
+    setTimeout(() => {
+      const chatbotElement = document.getElementById('chatbot-section');
+      if (chatbotElement) {
+        chatbotElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }
+    }, 100);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -248,7 +262,7 @@ const HomePage = () => {
               icon={<MessageCircle className="h-8 w-8 text-purple-600" />}
               title="AI Assistant"
               description="Chat with our AI-powered career counselor for instant, personalized advice."
-              action={() => setShowChatbot(true)}
+              action={scrollToChatbot}
             />
           </div>
         </div>
@@ -272,7 +286,7 @@ const HomePage = () => {
                 Take Career Quiz
               </Link>
               <button
-                onClick={() => setShowChatbot(!showChatbot)}
+                onClick={showChatbot ? () => setShowChatbot(false) : scrollToChatbot}
                 className="border-2 border-white text-white font-bold py-4 px-8 rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
               >
                 {showChatbot ? 'Hide AI Assistant' : 'Chat with AI Assistant'}
@@ -282,7 +296,7 @@ const HomePage = () => {
 
           {/* Embedded Chatbot Interface */}
           {showChatbot && (
-            <div className="mt-8 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 max-w-4xl mx-auto overflow-hidden">
+            <div id="chatbot-section" className="mt-8 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 max-w-4xl mx-auto overflow-hidden">
               <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-4 text-white">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -375,7 +389,7 @@ const HomePage = () => {
       {/* Floating Chatbot Button (appears when chatbot is closed) */}
       {!showChatbot && (
         <button
-          onClick={() => setShowChatbot(true)}
+          onClick={scrollToChatbot}
           className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40 flex items-center gap-2"
         >
           <Bot className="h-6 w-6" />
