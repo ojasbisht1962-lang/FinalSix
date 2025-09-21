@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search, User } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import UserProfile from './UserProfile';
 
@@ -63,10 +63,6 @@ const Layout = ({ children }) => {
 
             {/* Right side buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <button className="p-2 text-slate-300 hover:text-white hover:bg-slate-600/50 rounded-lg transition-all duration-300">
-                <Search className="h-5 w-5" />
-              </button>
-              
               {/* Authentication Section */}
               {isLoading ? (
                 <div className="animate-pulse bg-slate-600 rounded-lg h-10 w-24"></div>
