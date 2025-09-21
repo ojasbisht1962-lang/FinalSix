@@ -2,14 +2,29 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X, User, Bot, MessageCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import UserProfile from './UserProfile';
 
 const Layout = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [currentPromptLevel, setCurrentPromptLevel] = useState('main');
+  const [chatMessages, setChatMessages] = useState([
+    {
+      type: 'ai',
+      content: 'Hello! I\'m your CareerCompass AI Assistant. I can help you with career guidance, job search tips, and information about our website. Choose a category below to get started!',
+      timestamp: new Date().toLocaleTimeString()
+    }
+  ]);
+  
   const location = useLocation();
   const { isAuthenticated, isLoading } = useAuth();
+
+  // Check if current page should hide chatbot
+  const shouldHideChatbot = location.pathname === '/quiz' || 
+                           location.pathname === '/login' || 
+                           location.pathname === '/signup';
 
   const navigation = [
     { name: 'Home Page', href: '/', current: location.pathname === '/' },
