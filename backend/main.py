@@ -10,6 +10,7 @@ from routes.answers import answers_router
 from routes.careers import careers_router
 from routes.colleges import colleges_router
 from routes.schools import schools_router # New import
+from routes.ai import router as ai_router
 
 app = FastAPI(title="Career Guidance Backend")
 
@@ -42,6 +43,7 @@ app.include_router(answers_router, prefix="/answers")
 app.include_router(careers_router, prefix="/careers")
 app.include_router(colleges_router, prefix="/colleges")
 app.include_router(schools_router, prefix="/schools") # Include the new router
+app.include_router(ai_router, prefix="/ai") # Include AI chatbot routes
 
 @app.get("/")
 def home():
