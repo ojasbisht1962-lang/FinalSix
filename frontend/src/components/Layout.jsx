@@ -229,17 +229,20 @@ const Layout = ({ children }) => {
   };
 
   const scrollToChatbot = () => {
-    setShowChatbot(true);
-    // Wait a bit for the chatbot to render before scrolling
-    setTimeout(() => {
-      const chatbotElement = document.getElementById('chatbot-section');
-      if (chatbotElement) {
-        chatbotElement.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
-        });
-      }
-    }, 100);
+    // If not on homepage, navigate to homepage first
+    if (location.pathname !== '/') {
+      window.location.href = '/#ai-chatbot';
+      return;
+    }
+    
+    // If on homepage, scroll to chatbot section
+    const chatbotElement = document.getElementById('ai-chatbot');
+    if (chatbotElement) {
+      chatbotElement.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+    }
   };
 
   return (
