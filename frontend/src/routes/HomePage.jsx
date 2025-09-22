@@ -9,12 +9,13 @@ const HomePage = () => {
   const [messages, setMessages] = useState([
     {
       type: 'ai',
-      content: "Hello! I'm your CareerCompass AI Assistant. I can help you with career guidance, job search tips, resume advice, and anything related to your professional journey. What would you like to know?",
+      content: "Hello! I'm your CareerCompass AI Assistant. I can help you with career guidance, job opportunities, interview preparation, and more. How can I assist you today?",
       timestamp: new Date().toLocaleTimeString()
     }
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
@@ -62,7 +63,10 @@ const HomePage = () => {
   };
 
   const scrollToChat = () => {
-    document.getElementById('ai-chatbot')?.scrollIntoView({ behavior: 'smooth' });
+    setShowChat(true);
+    setTimeout(() => {
+      document.getElementById('ai-chatbot')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -118,90 +122,170 @@ const HomePage = () => {
       </div>
 
       {/* AI Chatbot Section */}
-      <div id="ai-chatbot" className="py-20 bg-gray-50">
+      <div id="ai-chatbot" className="py-20 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-800">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Chat with Our AI Career Assistant
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-cyan-400 rounded-full mb-8 mx-auto">
+              <Bot className="h-12 w-12 text-white" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Meet Your AI Career Assistant ✨
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get instant, personalized career guidance powered by Google Gemini AI. Ask me anything about careers, job searching, interviews, or professional development!
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+              Get instant answers to your career questions, explore opportunities, and 
+              receive personalized advice from our AI-powered assistant
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-              {/* Chat Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-700 p-4 text-white">
-                <div className="flex items-center gap-3">
-                  <Bot className="h-8 w-8" />
-                  <div>
-                    <h3 className="text-xl font-bold">CareerCompass AI Assistant</h3>
-                    <p className="text-blue-100 text-sm">Powered by Google Gemini - Your personal career counselor</p>
+          {!showChat ? (
+            // Feature Cards Section
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-cyan-500 rounded-full mb-6">
+                    <MessageCircle className="h-8 w-8 text-white" />
                   </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">24/7 Availability</h3>
+                  <p className="text-blue-100">
+                    Get instant responses to your career queries anytime, anywhere
+                  </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-500 rounded-full mb-6">
+                    <Zap className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Smart Insights</h3>
+                  <p className="text-blue-100">
+                    Receive intelligent career suggestions based on current market trends
+                  </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-500 rounded-full mb-6">
+                    <Sparkles className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Personalized Help</h3>
+                  <p className="text-blue-100">
+                    Get tailored advice for your unique career situation and goals
+                  </p>
                 </div>
               </div>
 
-              {/* Chat Messages */}
-              <div className="h-96 overflow-y-auto p-6 bg-gray-50">
-                <div className="space-y-4">
-                  {messages.map((message, index) => (
-                    <div
-                      key={index}
-                      className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <div
-                        className={`max-w-xs sm:max-w-sm lg:max-w-md px-4 py-3 rounded-2xl ${
-                          message.type === 'user'
-                            ? 'bg-blue-600 text-white ml-12'
-                            : 'bg-white text-gray-800 mr-12 shadow-sm border border-gray-200'
-                        }`}
-                      >
-                        <div className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</div>
-                        <div className="text-xs opacity-70 mt-2">{message.timestamp}</div>
-                      </div>
-                    </div>
-                  ))}
-                  {isLoading && (
-                    <div className="flex justify-start">
-                      <div className="bg-white text-gray-800 px-4 py-3 rounded-2xl mr-12 shadow-sm border border-gray-200">
-                        <div className="flex items-center gap-2">
-                          <Loader className="h-4 w-4 animate-spin" />
-                          <span className="text-sm">AI is thinking...</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Chat Input */}
-              <div className="p-4 border-t border-gray-200 bg-white">
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Ask me about careers, job search, interviews, resumes, or any professional questions..."
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    disabled={isLoading}
-                  />
-                  <button
-                    onClick={handleSendMessage}
-                    disabled={!inputMessage.trim() || isLoading}
-                    className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2"
-                  >
-                    <Send className="h-4 w-4" />
-                    <span className="hidden sm:inline">Send</span>
-                  </button>
-                </div>
-                <p className="text-xs text-gray-500 mt-2 text-center">
-                   Try asking: "What career is right for me?", "How do I prepare for interviews?", or "Help me improve my resume"
+              <div className="text-center">
+                <button
+                  onClick={scrollToChat}
+                  className="bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-4 px-12 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3 mx-auto text-lg"
+                >
+                  <Bot className="h-6 w-6" />
+                  Chat with AI Assistant
+                  <span className="ml-2">→</span>
+                </button>
+                <p className="text-cyan-100 mt-6 text-sm">
+                  AI-Powered Career Guidance • Available 24/7 • Integrated Experience
                 </p>
               </div>
             </div>
+          ) : (
+  // Chat Interface - Matching the exact design from your image
+  <div className="max-w-5xl mx-auto">
+    <div className="bg-white rounded-3xl shadow-2xl overflow-hidden" style={{minHeight: '600px'}}>
+      {/* Chat Header - Exactly like your image */}
+      <div className="bg-gradient-to-r from-cyan-400 to-cyan-500 p-6 text-white">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+              <Bot className="h-7 w-7" />
+            </div>
+            <h3 className="text-xl font-bold">CareerCompass AI Assistant</h3>
           </div>
+          <button
+            onClick={() => setShowChat(false)}
+            className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors text-2xl font-light"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+
+      {/* Chat Messages Area - Matching your image layout */}
+      <div className="flex-1 p-6 bg-gray-50" style={{minHeight: '420px'}}>
+        <div className="space-y-6">
+          {messages.map((message, index) => (
+            <div key={index}>
+              {message.type === 'ai' && (
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Bot className="h-5 w-5 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="font-semibold text-cyan-600 text-sm">AI Assistant</span>
+                    </div>
+                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 max-w-2xl">
+                      <p className="text-gray-800 leading-relaxed text-sm whitespace-pre-wrap">
+                        {message.content}
+                      </p>
+                      <div className="text-xs text-gray-400 mt-3">{message.timestamp}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {message.type === 'user' && (
+                <div className="flex justify-end">
+                  <div className="bg-cyan-500 text-white rounded-2xl p-4 shadow-sm max-w-2xl">
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                    <div className="text-xs text-cyan-100 mt-3 text-right">{message.timestamp}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+          {isLoading && (
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center">
+                <Bot className="h-5 w-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-semibold text-cyan-600 text-sm">AI Assistant</span>
+                </div>
+                <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <Loader className="h-4 w-4 animate-spin text-cyan-500" />
+                    <span className="text-gray-600 text-sm">AI is thinking...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Chat Input - Matching your image design */}
+      <div className="border-t border-gray-200 p-6 bg-white">
+        <div className="flex items-center gap-4">
+          <input
+            type="text"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Ask me about career guidance, job opportunities, or any career-related questions..."
+            className="flex-1 px-6 py-4 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent bg-gray-50 text-gray-800 placeholder-gray-500"
+            disabled={isLoading}
+          />
+          <button
+            onClick={handleSendMessage}
+            disabled={!inputMessage.trim() || isLoading}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white p-4 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg flex items-center justify-center"
+          >
+            <Send className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
         </div>
       </div>
 
