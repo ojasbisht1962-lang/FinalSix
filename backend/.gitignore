@@ -1,0 +1,41 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+# .gitignore
+Blogv/
+**/Blogv/
+*.pyc
+__pycache__/
+.env
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs
+*.log
+
+# Databases (if generated locally)
+*.sqlite3
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (optional, if you don’t want to share)
+.vscode/
+
+# Environment variables
+.env
+*.env
+
+# Compiled / distribution
+build/
+dist/
+*.egg-info/
+
+# Pip installer cache
+pip-wheel-metadata/
