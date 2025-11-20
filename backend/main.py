@@ -4,6 +4,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.arabian_quiz import router as arabian_quiz_router
+from routes.users import router as users_router
 
 app = FastAPI(title="Mirage - Arabian Nights Quiz API")
 
@@ -30,6 +31,7 @@ app.add_middleware(
 )
 
 app.include_router(arabian_quiz_router, prefix="/arabian-quiz")
+app.include_router(users_router, prefix="/users")
 
 @app.get("/")
 def home():
