@@ -1,4 +1,5 @@
 // src/routes/LoginPage.jsx
+// Updated: 2025-11-21 - Force deploy
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
