@@ -2,9 +2,10 @@ import os
 from motor.motor_asyncio import AsyncIOMotorClient
 
 # MongoDB connection - all user data, quiz data, profiles stored here
+# Note: @ in password must be URL-encoded as %40
 MONGODB_URL = os.getenv(
     "MONGODB_URL", 
-    "mongodb+srv://ojasbisht1962_db_user:Ojas@1962@clusterone.6a9q0rn.mongodb.net/?appName=ClusterOne"
+    "mongodb+srv://ojasbisht1962_db_user:Ojas%401962@clusterone.6a9q0rn.mongodb.net/?appName=ClusterOne"
 )
 
 # Database name for all application data
