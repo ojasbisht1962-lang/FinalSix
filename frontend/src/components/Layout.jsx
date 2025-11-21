@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
   ]);
   
   const location = useLocation();
-  const { isAuthenticated, isLoading, logout } = useAuth();
+  const { isAuthenticated, isLoading, logout, user } = useAuth();
 
   // Check if current page should hide chatbot
   const shouldHideChatbot = location.pathname === '/quiz' || 
