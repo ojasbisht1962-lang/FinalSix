@@ -200,6 +200,7 @@ async def get_quiz_stats():
     """Get overall quiz statistics"""
     try:
         from services.arabian_quiz_service import db
+        import traceback
         
         questions_collection = db["arabian_questions"]
         results_collection = db["arabian_quiz_results"]
@@ -230,4 +231,7 @@ async def get_quiz_stats():
         }
     
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+        error_detail = f"{str(e)}\n{traceback.format_exc()}"
+        print(f"Stats endpoint error: {error_detail}")
+        raise HTTPException(status_code=500, detail=f"bad auth : authentication failed, full error: {str(e)}")
