@@ -10,7 +10,7 @@ const Navbar = () => {
     { path: "/", label: "🏠 Home" },
     { path: "/arabian-quiz", label: "🪔 Take Quiz" },
     { path: "/arabian-quiz/leaderboard", label: "🏆 Leaderboard" },
-    { path: "/dashboard", label: "👤 Profile" },
+    { path: "/profile", label: "👤 Profile" },
   ];
 
   return (

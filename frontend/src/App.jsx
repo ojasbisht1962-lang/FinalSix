@@ -3,7 +3,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import Layout from "./components/Layout"; // Import Layout
+import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./routes/HomePage";
 import LoginPage from "./routes/LoginPage";
 import CompleteProfile from "./routes/CompleteProfile";
@@ -19,16 +21,59 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/complete-profile" element={<CompleteProfile />} />
-            <Route path="/arabian-quiz" element={<ArabianQuizIntro />} />
-            <Route path="/arabian-quiz/play" element={<ArabianQuizPlay />} />
-            <Route path="/arabian-quiz/results" element={<ArabianQuizResults />} />
-            <Route path="/arabian-quiz/leaderboard" element={<ArabianLeaderboard />} />
-            <Route path="/profile" element={<ArabianProfile />} />
+            <Route 
+              path="/complete-profile" 
+              element={
+                <ProtectedRoute>
+                  <CompleteProfile />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/arabian-quiz" 
+              element={
+                <ProtectedRoute>
+                  <ArabianQuizIntro />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/arabian-quiz/play" 
+              element={
+                <ProtectedRoute>
+                  <ArabianQuizPlay />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/arabian-quiz/results" 
+              element={
+                <ProtectedRoute>
+                  <ArabianQuizResults />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/arabian-quiz/leaderboard" 
+              element={
+                <ProtectedRoute>
+                  <ArabianLeaderboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <ArabianProfile />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </Layout>
       </Router>

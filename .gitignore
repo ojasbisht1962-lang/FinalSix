@@ -49,6 +49,15 @@ Thumbs.db
 *.log
 logs/
 
+# Test and debug files
+test_*.py
+analyze_*.py
+*.backup
+*.tmp
+
+# Genie lamp source files (only needed for development)
+genie-lamp/source/*.zip
+
 # Testing
 coverage/
 .nyc_output/

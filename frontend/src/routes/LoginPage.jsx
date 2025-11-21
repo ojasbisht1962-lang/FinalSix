@@ -66,7 +66,7 @@ const LoginPage = () => {
         throw new Error('Invalid credential format');
       }
       
-      console.log('Google Sign-In payload:', payload);
+      // console.log('Google Sign-In payload:', payload);
       
       const result = await signInWithGoogle(payload);
       if (result.success) {
@@ -89,19 +89,19 @@ const LoginPage = () => {
     try {
       setLoading(true);
       setError('');
-      console.log('Google Sign-In clicked - attempting real Google OAuth...');
+      // console.log('Google Sign-In clicked - attempting real Google OAuth...');
       
       if (window.google && window.google.accounts) {
-        console.log('Google library loaded, trying to prompt sign-in...');
+        // console.log('Google library loaded, trying to prompt sign-in...');
         
         // Try multiple methods to force Google sign-in
         try {
           // Method 1: Direct prompt
           window.google.accounts.id.prompt((notification) => {
-            console.log('Google prompt notification:', notification);
+            // console.log('Google prompt notification:', notification);
             
             if (notification.isNotDisplayed()) {
-              console.log('Google prompt not displayed - trying renderButton method');
+              // console.log('Google prompt not displayed - trying renderButton method');
               // Method 2: Render button and auto-click
               const tempDiv = document.createElement('div');
               tempDiv.style.position = 'absolute';
