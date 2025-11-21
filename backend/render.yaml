@@ -12,7 +12,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.0"
       - key: MONGODB_URL
-        value: "mongodb+srv://ojasbisht1962_db_user:Ojas1962@clusterone.6a9q0rn.mongodb.net/?appName=ClusterOne"
+        value: "mongodb+srv://ojasbisht1962_db_user:Password123@clusterone.6a9q0rn.mongodb.net/?appName=ClusterOne"
       - key: DATABASE_NAME
         value: "arabian_nights_quiz"
       - key: FRONTEND_URL
