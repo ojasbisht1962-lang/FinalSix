@@ -10,14 +10,16 @@ const QuizHistory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [expandedQuiz, setExpandedQuiz] = useState(null);
+
+  useEffect(() => {
+    if (user && user.type === 'google') {
+      fetchQuizHistory();
+    }
+  }, [user]);
   
   if (!user || user.type !== 'google') {
     return null;
   }
-
-  useEffect(() => {
-    fetchQuizHistory();
-  }, [user]);
 
   const fetchQuizHistory = async () => {
     setLoading(true);
