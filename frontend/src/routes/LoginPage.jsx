@@ -270,12 +270,13 @@ const LoginPage = () => {
             {/* Sign In Options */}
             <div className="space-y-4">
               {/* Google Sign-In Button */}
-              <div className="w-full">
+              <div className="w-full mb-4">
                 <button
                   onClick={handleGoogleSignIn}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-3 bg-white border-2 border-blue-500 text-gray-700 px-6 py-4 rounded-xl font-semibold hover:bg-blue-50 hover:border-blue-600 hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group shadow-md"
+                  className="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-400 text-gray-800 px-6 py-4 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-500 hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group shadow-lg"
                   title="Sign in with your Google account"
+                  style={{minHeight: '56px'}}
                 >
                   <svg className="w-6 h-6" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
