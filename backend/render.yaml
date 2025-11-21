@@ -1,11 +1,19 @@
 version: "1"
 services:
   - type: web
-    name: career-guidance-backend
+    name: matricks-backend
     env: python
+    region: oregon
+    plan: free
     buildCommand: "pip install -r requirements.txt"
     startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
     healthCheckPath: "/"
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.0"
+      - key: MONGODB_URL
+        value: "mongodb+srv://ojasbisht1962_db_user:Ojas@1962@clusterone.6a9q0rn.mongodb.net/?appName=ClusterOne"
+      - key: DATABASE_NAME
+        value: "arabian_nights_quiz"
+      - key: FRONTEND_URL
+        value: "https://matricks.vercel.app"

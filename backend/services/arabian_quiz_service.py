@@ -1,17 +1,7 @@
-from motor.motor_asyncio import AsyncIOMotorClient
+from database import db
 from datetime import datetime, timedelta
 from typing import List, Optional
-import os
-from dotenv import load_dotenv
 import random
-
-load_dotenv()
-
-MONGODB_URL = os.getenv("MONGODB_URL", "mongodb+srv://ojasbisht1962_db_user:LdYXdQ3eO543G3Ka@clusterone.6a9q0rn.mongodb.net/")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "career_guidance")
-
-client = AsyncIOMotorClient(MONGODB_URL)
-db = client[DATABASE_NAME]
 
 async def get_questions_by_difficulty(difficulty: str = "all", story: str = "all", limit: int = 20) -> List[dict]:
     """

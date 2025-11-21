@@ -4,10 +4,33 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "vite",
+  "env": {
+    "VITE_API_URL": "https://matricks.onrender.com",
+    "VITE_GOOGLE_CLIENT_ID": "1070985351952-kps4ke1t7rh1n6t2cp1vubr3i8tfabn9.apps.googleusercontent.com"
+  },
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }

@@ -14,8 +14,8 @@ allowed_origins = [
     "http://localhost:5173",
     "https://vercel.app",  # Base Vercel domain
     "https://matricks.vercel.app",  # Main production frontend URL
-    "https://matricks-lh40n9oc5-ojas-bishts-projects.vercel.app",  # Current deployment
-    "https://matricks-git-master-ojas-bishts-projects.vercel.app"  # Git branch deployment
+    "https://matricks-git-main-ojasbisht1962-langs-projects.vercel.app",  # Git deployment
+    "https://*.vercel.app",  # All Vercel preview deployments
 ]
 # Add production frontend URL when deployed from environment variable
 frontend_url = os.getenv("FRONTEND_URL")
