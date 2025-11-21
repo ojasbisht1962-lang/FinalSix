@@ -89,3 +89,6 @@ async def delete_user_account(google_id: str):
         return {"success": True, "message": "Account deleted successfully", "deleted_count": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Export router for main.py
+router = users_router
