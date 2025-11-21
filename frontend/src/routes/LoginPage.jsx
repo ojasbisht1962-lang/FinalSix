@@ -70,7 +70,12 @@ const LoginPage = () => {
       
       const result = await signInWithGoogle(payload);
       if (result.success) {
-        navigate('/dashboard');
+        // Check if profile is completed
+        if (result.user && !result.user.profile_completed) {
+          navigate('/complete-profile');
+        } else {
+          navigate('/');
+        }
       } else {
         setError(result.error || 'Google sign-in failed');
       }

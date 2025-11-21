@@ -3,13 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { getUserProfile, updateUserProfile, deleteUserAccount } from '../services/api';
+import { getUserProfile, updateUserProfile, deleteUserAccount, getUserQuizHistory } from '../services/api';
 import { User, Mail, Phone, Calendar, Edit2, Save, X, Trash2 } from 'lucide-react';
+import BadgesSection from '../components/BadgesSection';
 
 const UserProfilePage = () => {
   const navigate = useNavigate();
   const { user, logout, refreshUserData } = useAuth();
   const [profileData, setProfileData] = useState(null);
+  const [quizHistory, setQuizHistory] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -39,6 +41,16 @@ const UserProfilePage = () => {
           age: response.user.age || '',
           phone: response.user.phone || ''
         });
+      }
+      
+      // Fetch quiz history for badges
+      try {
+        const historyResponse = await getUserQuizHistory(user.google_id);
+        if (historyResponse.success) {
+          setQuizHistory(historyResponse.history || []);
+        }
+      } catch (err) {
+        console.error('Error fetching quiz history:', err);
       }
     } catch (error) {
       console.error('Error fetching profile:', error);
@@ -254,6 +266,9 @@ const UserProfilePage = () => {
               )}
             </div>
           </div>
+
+          {/* Badges Section */}
+          <BadgesSection quizHistory={quizHistory} />
 
           {/* Delete Account */}
           <div className="mt-12 pt-8 border-t border-white/10">

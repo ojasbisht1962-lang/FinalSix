@@ -1,6 +1,6 @@
 // src/routes/CompleteProfile.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { completeProfile } from '../services/api';
@@ -8,13 +8,20 @@ import { User, Phone, Calendar } from 'lucide-react';
 
 const CompleteProfile = () => {
   const navigate = useNavigate();
-  const { user, refreshUserData } = useAuth();
+  const { user, refreshUserData, isAuthenticated } = useAuth();
   const [formData, setFormData] = useState({
     age: '',
     phone: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Redirect if not authenticated
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,13 +45,14 @@ const CompleteProfile = () => {
 
     try {
       setLoading(true);
-      const response = await completeProfile(user.google_id, {
+      const googleId = user.google_id || user.id;
+      const response = await completeProfile(googleId, {
         age: parseInt(formData.age),
         phone: formData.phone
       });
 
       if (response.success) {
-        await refreshUserData(user.google_id);
+        await refreshUserData(googleId);
         navigate('/');
       } else {
         setError('Failed to update profile');

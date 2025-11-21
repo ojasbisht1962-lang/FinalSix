@@ -138,3 +138,35 @@ export const getQuizStats = async () => {
   const res = await API.get(`/arabian-quiz/stats`);
   return res.data; // { success, total_questions, total_quiz_attempts, ... }
 };
+
+// ------------------- USER PROFILE ------------------- //
+
+// Get user profile
+export const getUserProfile = async (googleId) => {
+  const res = await API.get(`/users/profile/${googleId}`);
+  return res.data; // { success, profile }
+};
+
+// Create or update user profile
+export const createOrUpdateProfile = async (profileData) => {
+  const res = await API.post(`/users/profile`, profileData);
+  return res.data; // { success, profile }
+};
+
+// Complete user profile (add age and phone)
+export const completeProfile = async (googleId, data) => {
+  const res = await API.put(`/users/profile/${googleId}/complete`, data);
+  return res.data; // { success, profile }
+};
+
+// Update user profile
+export const updateUserProfile = async (googleId, data) => {
+  const res = await API.put(`/users/profile/${googleId}`, data);
+  return res.data; // { success, profile }
+};
+
+// Delete user account
+export const deleteUserAccount = async (googleId) => {
+  const res = await API.delete(`/users/profile/${googleId}`);
+  return res.data; // { success, message, deleted_count }
+};

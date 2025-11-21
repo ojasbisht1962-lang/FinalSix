@@ -1,6 +1,7 @@
 // src/contexts/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import API_CONFIG from '../config/api';
+import { getUserProfile, createOrUpdateProfile } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -36,6 +37,28 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+  // Refresh user data from backend
+  const refreshUserData = async (googleId) => {
+    try {
+      const response = await getUserProfile(googleId);
+      if (response.success && response.profile) {
+        const updatedUser = {
+          ...user,
+          age: response.profile.age,
+          phone: response.profile.phone,
+          profile_completed: response.profile.profile_completed,
+          google_id: response.profile.google_id
+        };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        return updatedUser;
+      }
+    } catch (error) {
+      console.error('Error refreshing user data:', error);
+    }
+    return null;
+  };
+
   // Google Sign-In handler
   const signInWithGoogle = async (googleUser) => {
     try {
@@ -43,11 +66,30 @@ export const AuthProvider = ({ children }) => {
       
       const userData = {
         id: googleUser.sub || googleUser.id,
+        google_id: googleUser.sub || googleUser.id,
         name: googleUser.name,
         email: googleUser.email,
         picture: googleUser.picture,
         type: 'google'
       };
+
+      // Create or update profile in backend
+      try {
+        const profileResponse = await createOrUpdateProfile({
+          google_id: userData.google_id,
+          name: userData.name,
+          email: userData.email,
+          picture: userData.picture
+        });
+
+        if (profileResponse.success && profileResponse.profile) {
+          userData.age = profileResponse.profile.age;
+          userData.phone = profileResponse.profile.phone;
+          userData.profile_completed = profileResponse.profile.profile_completed;
+        }
+      } catch (error) {
+        console.error('Error creating/updating profile:', error);
+      }
 
       // Store user data
       localStorage.setItem('user', JSON.stringify(userData));
@@ -122,6 +164,7 @@ export const AuthProvider = ({ children }) => {
     signInWithGoogle,
     signInAsGuest,
     logout,
+    refreshUserData,
     // Quiz history functions - for Google users, fetch from database
     saveQuizResult: (quizData) => {
       if (user && user.type === 'google') {

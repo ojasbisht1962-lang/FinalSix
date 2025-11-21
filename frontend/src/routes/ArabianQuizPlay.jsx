@@ -65,8 +65,33 @@ const ArabianQuizPlay = () => {
   }, [currentQuestion, loading, showFeedback]);
 
   const handleTimeUp = () => {
-    // Auto-select no answer and move to next
-    handleAnswerSubmit(null);
+    // Auto-select no answer and show correct answer
+    setShowFeedback(true);
+    setCorrectAnswer(questions[currentQuestion].correct_index);
+    setFeedback('timeout');
+    
+    const timeTaken = Math.floor((Date.now() - questionStartTime) / 1000);
+    const newAnswer = {
+      question_id: questions[currentQuestion].id,
+      selected_index: -1, // No answer selected
+      time_taken: timeTaken
+    };
+    setAnswers([...answers, newAnswer]);
+    
+    // Show correct answer for 3 seconds then move to next
+    setTimeout(() => {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(null);
+        setShowFeedback(false);
+        setCorrectAnswer(null);
+        setFeedback(null);
+        setTimeLeft(15);
+        setQuestionStartTime(Date.now());
+      } else {
+        submitQuizResults([...answers, newAnswer]);
+      }
+    }, 3000);
   };
 
   const handleAnswerClick = async (index) => {
@@ -76,13 +101,17 @@ const ArabianQuizPlay = () => {
     // Show immediate feedback
     setShowFeedback(true);
     
-    // Fetch the correct answer from backend for validation
-    // For now, we'll show feedback without validation until next question
+    // Check if answer is correct
+    const currentQ = questions[currentQuestion];
+    const isCorrect = index === currentQ.correct_index;
+    setCorrectAnswer(currentQ.correct_index);
+    setFeedback(isCorrect ? 'correct' : 'wrong');
+    
     const timeTaken = Math.floor((Date.now() - questionStartTime) / 1000);
     
     // Save answer
     const newAnswer = {
-      question_id: questions[currentQuestion].id,
+      question_id: currentQ.id,
       selected_index: index,
       time_taken: timeTaken
     };
@@ -96,13 +125,14 @@ const ArabianQuizPlay = () => {
         setSelectedAnswer(null);
         setShowFeedback(false);
         setCorrectAnswer(null);
+        setFeedback(null);
         setTimeLeft(15);
         setQuestionStartTime(Date.now());
       } else {
         // Quiz complete - submit
         submitQuizResults([...answers, newAnswer]);
       }
-    }, 2000); // Show feedback for 2 seconds
+    }, 3000); // Show feedback for 3 seconds
   };
 
   const handleAnswerSubmit = (answerIndex) => {
@@ -280,39 +310,73 @@ const ArabianQuizPlay = () => {
 
           {/* Options */}
           <div className="space-y-4">
-            {question.options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleAnswerClick(index)}
-                disabled={showFeedback}
-                className={`w-full p-5 rounded-xl text-left transition-all duration-300 ${
-                  showFeedback && selectedAnswer === index
-                    ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg transform scale-105 ring-4 ring-blue-300'
-                    : selectedAnswer === index
-                    ? 'bg-gradient-to-r from-yellow-500 to-amber-500 text-gray-900 shadow-lg shadow-yellow-500/50 transform scale-105'
-                    : 'bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:scale-105'
-                } ${showFeedback ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <span className="text-2xl font-bold mr-4">
-                      {String.fromCharCode(65 + index)}.
-                    </span>
-                    <span className="text-lg">{option}</span>
+            {question.options.map((option, index) => {
+              const isSelected = selectedAnswer === index;
+              const isCorrect = correctAnswer === index;
+              const showCorrect = showFeedback && isCorrect;
+              const showWrong = showFeedback && isSelected && !isCorrect;
+              
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleAnswerClick(index)}
+                  disabled={showFeedback}
+                  className={`w-full p-5 rounded-xl text-left transition-all duration-300 ${
+                    showCorrect
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transform scale-105 ring-4 ring-green-300'
+                      : showWrong
+                      ? 'bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg transform scale-105 ring-4 ring-red-300'
+                      : isSelected && !showFeedback
+                      ? 'bg-gradient-to-r from-yellow-500 to-amber-500 text-gray-900 shadow-lg shadow-yellow-500/50 transform scale-105'
+                      : 'bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:scale-105'
+                  } ${showFeedback ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="text-2xl font-bold mr-4">
+                        {String.fromCharCode(65 + index)}.
+                      </span>
+                      <span className="text-lg">{option}</span>
+                    </div>
+                    {showCorrect && (
+                      <span className="text-3xl animate-bounce">✅</span>
+                    )}
+                    {showWrong && (
+                      <span className="text-3xl animate-pulse">❌</span>
+                    )}
                   </div>
-                  {showFeedback && selectedAnswer === index && (
-                    <span className="text-3xl animate-pulse">📝</span>
-                  )}
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
           
-          {/* Immediate Feedback Message */}
-          {showFeedback && (
-            <div className="mt-6 bg-blue-600/30 border-2 border-blue-400 rounded-xl p-4 animate-pulse">
-              <p className="text-white text-center text-lg font-bold">
-                ✓ Answer recorded! Moving to next question...
+          {/* Feedback Messages */}
+          {showFeedback && feedback === 'correct' && (
+            <div className="mt-6 bg-green-600/30 border-2 border-green-400 rounded-xl p-4">
+              <p className="text-white text-center text-xl font-bold flex items-center justify-center gap-3">
+                <span className="text-3xl">🎉</span>
+                Correct! Well done!
+                <span className="text-3xl">🎉</span>
+              </p>
+            </div>
+          )}
+          
+          {showFeedback && feedback === 'wrong' && (
+            <div className="mt-6 bg-red-600/30 border-2 border-red-400 rounded-xl p-4">
+              <p className="text-white text-center text-xl font-bold flex items-center justify-center gap-3">
+                <span className="text-3xl">❌</span>
+                Wrong! The correct answer is: {String.fromCharCode(65 + correctAnswer)}
+                <span className="text-3xl">❌</span>
+              </p>
+            </div>
+          )}
+          
+          {showFeedback && feedback === 'timeout' && (
+            <div className="mt-6 bg-orange-600/30 border-2 border-orange-400 rounded-xl p-4">
+              <p className="text-white text-center text-xl font-bold flex items-center justify-center gap-3">
+                <span className="text-3xl">⏰</span>
+                Time's up! The correct answer was: {String.fromCharCode(65 + correctAnswer)}
+                <span className="text-3xl">⏰</span>
               </p>
             </div>
           )}

@@ -6,6 +6,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Layout from "./components/Layout"; // Import Layout
 import HomePage from "./routes/HomePage";
 import LoginPage from "./routes/LoginPage";
+import CompleteProfile from "./routes/CompleteProfile";
 import ArabianQuizIntro from "./routes/ArabianQuizIntro";
 import ArabianQuizPlay from "./routes/ArabianQuizPlay";
 import ArabianQuizResults from "./routes/ArabianQuizResults";
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/complete-profile" element={<CompleteProfile />} />
             <Route path="/arabian-quiz" element={<ArabianQuizIntro />} />
             <Route path="/arabian-quiz/play" element={<ArabianQuizPlay />} />
             <Route path="/arabian-quiz/results" element={<ArabianQuizResults />} />

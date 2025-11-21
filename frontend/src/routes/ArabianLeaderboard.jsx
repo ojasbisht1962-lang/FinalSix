@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { getGlobalLeaderboard, getWeeklyLeaderboard } from '../services/api';
 import arabianTheme from '../data/arabianTheme';
+import Podium from '../components/Podium';
 
 const ArabianLeaderboard = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [leaderboardType, setLeaderboardType] = useState('global'); // global or weekly
   const [difficulty, setDifficulty] = useState('all');
   const [story, setStory] = useState('all');
   const [leaderboard, setLeaderboard] = useState([]);
+  const [currentUserPosition, setCurrentUserPosition] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,6 +28,13 @@ const ArabianLeaderboard = () => {
 
       if (response.success) {
         setLeaderboard(response.leaderboard);
+        
+        // Find current user's position if logged in
+        if (user && user.type === 'google') {
+          const googleId = user.google_id || user.id;
+          const userEntry = response.leaderboard.find(entry => entry.google_id === googleId);
+          setCurrentUserPosition(userEntry);
+        }
       }
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
@@ -116,7 +127,7 @@ const ArabianLeaderboard = () => {
         </div>
       </div>
 
-      {/* Leaderboard Table */}
+      {/* Leaderboard Content */}
       <div className="max-w-6xl mx-auto">
         {loading ? (
           <div className="text-center py-12">
@@ -136,55 +147,119 @@ const ArabianLeaderboard = () => {
             </button>
           </div>
         ) : (
-          <div className="space-y-4">
-            {leaderboard.map((entry, index) => (
-              <div
-                key={index}
-                className={`bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-purple-400/30 transform transition-all duration-300 hover:scale-105 ${
-                  entry.rank <= 3 ? 'shadow-2xl' : 'shadow-lg'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  {/* Rank & User Info */}
-                  <div className="flex items-center gap-6">
-                    <div className={`text-4xl font-bold bg-gradient-to-r ${getRankColor(entry.rank)} bg-clip-text text-transparent`}>
-                      {getMedalEmoji(entry.rank)}
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-1">
-                        {entry.username || 'Anonymous'}
-                      </h3>
-                      <div className="flex gap-3 text-sm text-gray-300">
-                        <span className="bg-purple-600/30 px-3 py-1 rounded-full">
-                          📚 {entry.story}
-                        </span>
-                        <span className={`px-3 py-1 rounded-full ${
-                          entry.difficulty === 'easy' ? 'bg-green-600/30' :
-                          entry.difficulty === 'medium' ? 'bg-amber-600/30' :
-                          'bg-red-600/30'
-                        }`}>
-                          ⭐ {entry.difficulty}
-                        </span>
+          <>
+            {/* Top 3 Podium */}
+            {leaderboard.length >= 1 && (
+              <div className="mb-16">
+                <Podium topPlayers={leaderboard.slice(0, 3)} />
+              </div>
+            )}
+
+            {/* Current User Position (if not in top 3) */}
+            {currentUserPosition && currentUserPosition.rank > 3 && (
+              <div className="mb-8">
+                <div className="bg-gradient-to-r from-blue-600/40 to-purple-600/40 backdrop-blur-lg rounded-2xl p-6 border-2 border-blue-400/50 shadow-2xl">
+                  <div className="text-center mb-3">
+                    <h3 className="text-xl font-bold text-yellow-300">Your Position</h3>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    {/* Rank & User Info */}
+                    <div className="flex items-center gap-6">
+                      <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        #{currentUserPosition.rank}
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white mb-1">
+                          {currentUserPosition.username || 'You'}
+                        </h3>
+                        <div className="flex gap-3 text-sm text-gray-300">
+                          <span className="bg-purple-600/30 px-3 py-1 rounded-full">
+                            📚 {currentUserPosition.story}
+                          </span>
+                          <span className={`px-3 py-1 rounded-full ${
+                            currentUserPosition.difficulty === 'easy' ? 'bg-green-600/30' :
+                            currentUserPosition.difficulty === 'medium' ? 'bg-amber-600/30' :
+                            'bg-red-600/30'
+                          }`}>
+                            ⭐ {currentUserPosition.difficulty}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Score Info */}
-                  <div className="text-right">
-                    <div className="text-3xl font-bold text-yellow-300 mb-1">
-                      {entry.score}/{entry.total_questions}
-                    </div>
-                    <div className="text-sm text-gray-300">
-                      {Math.round((entry.score / entry.total_questions) * 100)}%
-                    </div>
-                    <div className="text-xs text-gray-400 mt-1">
-                      ⏱️ {Math.floor(entry.time_taken / 60)}:{(entry.time_taken % 60).toString().padStart(2, '0')}
+                    {/* Score Info */}
+                    <div className="text-right">
+                      <div className="text-3xl font-bold text-yellow-300 mb-1">
+                        {currentUserPosition.score}/{currentUserPosition.total_questions}
+                      </div>
+                      <div className="text-sm text-gray-300">
+                        {Math.round((currentUserPosition.score / currentUserPosition.total_questions) * 100)}%
+                      </div>
+                      <div className="text-xs text-gray-400 mt-1">
+                        ⏱️ {Math.floor(currentUserPosition.time_taken / 60)}:{(currentUserPosition.time_taken % 60).toString().padStart(2, '0')}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            )}
+
+            {/* Rest of Leaderboard (starting from rank 4) */}
+            {leaderboard.length > 3 && (
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-white text-center mb-6">Other Top Performers</h3>
+                {leaderboard.slice(3).map((entry, index) => (
+                  <div
+                    key={index}
+                    className={`bg-white/10 backdrop-blur-lg rounded-xl p-6 border ${
+                      currentUserPosition && entry.rank === currentUserPosition.rank
+                        ? 'border-blue-400/50 shadow-lg shadow-blue-500/30'
+                        : 'border-purple-400/30'
+                    } transform transition-all duration-300 hover:scale-105 shadow-lg`}
+                  >
+                    <div className="flex items-center justify-between">
+                      {/* Rank & User Info */}
+                      <div className="flex items-center gap-6">
+                        <div className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                          #{entry.rank}
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-white mb-1">
+                            {entry.username || 'Anonymous'}
+                          </h3>
+                          <div className="flex gap-3 text-sm text-gray-300">
+                            <span className="bg-purple-600/30 px-3 py-1 rounded-full">
+                              📚 {entry.story}
+                            </span>
+                            <span className={`px-3 py-1 rounded-full ${
+                              entry.difficulty === 'easy' ? 'bg-green-600/30' :
+                              entry.difficulty === 'medium' ? 'bg-amber-600/30' :
+                              'bg-red-600/30'
+                            }`}>
+                              ⭐ {entry.difficulty}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Score Info */}
+                      <div className="text-right">
+                        <div className="text-3xl font-bold text-yellow-300 mb-1">
+                          {entry.score}/{entry.total_questions}
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          {Math.round((entry.score / entry.total_questions) * 100)}%
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          ⏱️ {Math.floor(entry.time_taken / 60)}:{(entry.time_taken % 60).toString().padStart(2, '0')}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
 
